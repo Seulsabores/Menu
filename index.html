@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seul Sabores - Pedido Online</title>
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #1d3557;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --gray-light: #e9ecef;
+            --success-color: #25d366;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding-bottom: 90px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+
+        .header-logo {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 6px;
+            background-color: var(--gray-light);
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin: 20px 0 10px 5px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item-header {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            background-color: var(--gray-light);
+        }
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .item-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin: 2px 0 4px 0;
+        }
+
+        .price {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            align-self: center;
+        }
+
+        .qty-btn {
+            background-color: var(--gray-light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:active {
+            background-color: #ced4da;
+        }
+
+        .qty-display {
+            font-weight: bold;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .options-box {
+            background-color: #f1f3f5;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .options-box.active {
+            display: block;
+        }
+
+        .options-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .notes-section {
+            margin-top: 25px;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .notes-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .notes-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .footer-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .total-display {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .whatsapp-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #20ba5a;
+        }
+
+        @media (min-width: 600px) {
+            .footer-bar {
+                max-width: 600px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="img/logo.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+            <h1>🏪 Seul Sabores</h1>
+        </div>
+        <p>Faça seu pedido direto pelo WhatsApp</p>
+    </header>
+
+    <div class="container" id="menu-container">
+        </div>
+
+    <div class="container">
+        <div class="notes-section">
+            <label for="order-notes">Observações</label>
+            <textarea id="order-notes" rows="2" placeholder="Ex: Caprichar no ketchup, troco para R$ 50..."></textarea>
+        </div>
+    </div>
+
+    <div class="footer-bar">
+        <div class="total-display">
+            Total: <span id="total-price">R$ 0,00</span>
+        </div>
+        <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+            📱 Finalizar pedido
+        </button>
+    </div>
+
+    <script>
+        const menuData = [
+            {
+                category: "🌭 Hot dog",
+                items: [
+                    { id: "hotdog_1", name: "Meio meio", price: 8.00, hasSauce: true, description: "Salsicha, molho especial e batata palha.", image: "img/hotdog_meiomeio.jpg" },
+                    { id: "hotdog_2", name: "Super queijo", price: 9.00, hasSauce: true, description: "Com dobro de queijo derretido.", image: "img/hotdog_superqueijo.jpg" },
+                    { id: "hotdog_3", name: "Meio meio c/ batata", price: 10.00, hasSauce: true, description: "Salsicha, molho especial e extra batata.", image: "img/hotdog_meiomeiocbatata.jpg" },
+                    { id: "hotdog_4", name: "Super queijo c/ batata", price: 11.00, hasSauce: true, description: "Super queijo com batata palha crocante.", image: "img/hotdog_superqueijocbatata.jpg" }
+                ]
+            },
+            {
+                category: "🥟 Pastel",
+                items: [
+                    { id: "pastel_1", name: "Queijo", price: 6.50, hasSauce: false, description: "Pastel recheado com queijo.", image: "img/pastel_queijo.jpg" },
+                    { id: "pastel_2", name: "Misto", price: 7.50, hasSauce: false, description: "Queijo e presunto.", image: "img/pastel_misto.jpg" },
+                    { id: "pastel_3", name: "Mistão", price: 11.00, hasSauce: false, description: "Misto especial caprichado.", image: "img/pastel_mistao.jpg" }
+                ]
+            },
+            {
+                category: "🍔 Outros",
+                items: [
+                    { id: "other_1", name: "Sanduíche", price: 12.00, hasSauce: false, description: "Sanduíche saboroso da casa.", image: "img/sanduiche.jpg" },
+                    { id: "other_2", name: "Palito de queijo", price: 4.00, hasSauce: false, description: "Palito de queijo empanado.", image: "img/palito_queijo.jpg" },
+                    { id: "other_3", name: "Bolinha de queijo", price: 1.50, hasSauce: false, description: "Unidade de bolinha de queijo.", image: "img/bolinha_queijo.jpg" },
+                    { id: "other_4", name: "Batata espiral", price: 4.50, hasSauce: true, description: "Batata no palito em formato espiral.", image: "img/batata_espiral.jpg" },
+                    { id: "other_5", name: "Tokoti", price: 4.00, hasSauce: false, description: "Lanche especial Tokoti.", image: "img/tokoti.jpg" }
+                ]
+            },
+            {
+                category: "🍱 Combo",
+                items: [
+                    { id: "combo_1", name: "Sanduíche + batata frita", price: 17.00, hasSauce: false, description: "Acompanha sanduíche e batata frita.", image: "img/combo_sanduiche.jpg" }
+                ]
+            },
+            {
+                category: "🥤 Bebidas",
+                items: [
+                    { id: "drink_1", name: "Guaraná", price: 2.50, hasSauce: false, description: "Lata 350ml.", image: "img/guarana.jpg" },
+                    { id: "drink_2", name: "Laranja", price: 2.50, hasSauce: false, description: "Suco ou refrigerante sabor laranja.", image: "img/laranja.jpg" }
+                ]
+            }
+        ];
+
+        const saucesList = ["Ketchup", "Maionese", "Mostarda"];
+        const whatsappNumber = "5585996287458";
+
+        let cart = {};
+
+        function initMenu() {
+            const container = document.getElementById("menu-container");
+            
+            menuData.forEach((cat) => {
+                const catTitle = document.createElement("div");
+                catTitle.className = "category-title";
+                catTitle.innerText = cat.category;
+                container.appendChild(catTitle);
+
+                cat.items.forEach(item => {
+                    cart[item.id] = {
+                        name: item.name,
+                        price: item.price,
+                        qty: 0,
+                        hasSauce: item.hasSauce,
+                        sauces: { Ketchup: false, Maionese: false, Mostarda: false }
+                    };
+
+                    const card = document.createElement("div");
+                    card.className = "item-card";
+
+                    let saucesHtml = "";
+                    if (item.hasSauce) {
+                        let checkboxes = saucesList.map(sauce => `
+                            <label>
+                                <input type="checkbox" onchange="toggleSauce('${item.id}', '${sauce}', this.checked)">
+                                ${sauce}
+                            </label>
+                        `).join("");
+
+                        saucesHtml = `
+                            <div class="options-box active">
+                                <div class="options-title">Escolha seu molho:</div>
+                                <div class="checkbox-group">
+                                    ${checkboxes}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    let descHtml = item.description ? `<div class="item-desc">${item.description}</div>` : "";
+
+                    card.innerHTML = `
+                        <div class="item-header">
+                            <img src="${item.image}" alt="${item.name}" class="item-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'70\\' height=\\'70\\' viewBox=\\'0 0 24 24\\'><rect width=\\'24\\' height=\\'24\\' fill=\\'%23e9ecef\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'10\\' fill=\\'%236c757d\\'>Sem Foto</text></svg>'">
+                            <div class="item-info">
+                                <h3>${item.name}</h3>
+                                ${descHtml}
+                                <div class="price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+                            </div>
+                            <div class="item-controls">
+                                <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                                <span class="qty-display" id="qty-${item.id}">0</span>
+                                <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                            </div>
+                        </div>
+                        ${saucesHtml}
+                    `;
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        function updateQty(id, change) {
+            if (cart[id]) {
+                cart[id].qty = Math.max(0, cart[id].qty + change);
+                document.getElementById(`qty-${id}`).innerText = cart[id].qty;
+                updateTotal();
+            }
+        }
+
+        function toggleSauce(id, sauce, checked) {
+            if (cart[id]) {
+                cart[id].sauces[sauce] = checked;
+            }
+        }
+
+        function updateTotal() {
+            let total = 0;
+            for (let id in cart) {
+                total += cart[id].price * cart[id].qty;
+            }
+            document.getElementById("total-price").innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function sendWhatsAppOrder() {
+            let total = 0;
+            let hasItems = false;
+            let message = "Olá! Gostaria de fazer um pedido:\n\n";
+
+            for (let id in cart) {
+                let item = cart[id];
+                if (item.qty > 0) {
+                    hasItems = true;
+                    total += item.price * item.qty;
+                    message += `🌭 ${item.name} x${item.qty}\n`;
+
+                    if (item.hasSauce) {
+                        let selectedSauces = Object.keys(item.sauces).filter(s => item.sauces[s]);
+                        if (selectedSauces.length > 0) {
+                            message += `   Molho: ${selectedNames(selectedSauces)}\n`; // 깔끔한 처리를 위해 내부 유지
+                        }
+                    }
+                }
+            }
+
+            // ... (하단 기존 메시지 전송 로직 유지)
+            // 아래는 원래 로직과 동일하게 작동합니다.
+            // (실제 파일 내 sendWhatsAppOrder 함수 전체가 포함되어 있으니 그대로 쓰시면 됩니다.)
+        }
+
+        // 전체 교체를 위한 수정된 sendWhatsAppOrder 함수 반영됨
+        function sendWhatsAppOrder() {
+            let total = 0;
+            let hasItems = false;
+            let message = "Olá! Gostaria de fazer um pedido:\n\n";
+
+            for (let id in cart) {
+                let item = cart[id];
+                if (item.qty > 0) {
+                    hasItems = true;
+                    total += item.price * item.qty;
+                    message += `🌭 ${item.name} x${item.qty}\n`;
+
+                    if (item.hasSauce) {
+                        let selectedSauces = Object.keys(item.sauces).filter(s => item.sauces[s]);
+                        if (selectedSauces.length > 0) {
+                            message += `   Molho: ${selectedSauces.join(", ")}\n`;
+                        }
+                    }
+                }
+            }
+
+            if (!hasItems) {
+                alert("Por favor, selecione ao menos um item para fazer o pedido.");
+                return;
+            }
+
+            message += `\n💰 Total: R$ ${total.toFixed(2).replace('.', ',')}\n`;
+
+            let notes = document.getElementById("order-notes").value.trim();
+            if (notes) {
+                message += `\nObservação:\n${notes}\n`;
+            }
+
+            message += "\nObrigado!";
+
+            let url = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        window.onload = initMenu;
+    </script>
+</body>
+</html>
