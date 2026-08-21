@@ -170,7 +170,7 @@
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            font-size: 0.95srem;
+            font-size: 0.95rem;
         }
 
         .payment-options {
@@ -314,7 +314,7 @@
                     { id: "other_2", name: "Palito de queijo", price: 4.00, description: "Palito de Queijo empanado.", image: "img/palito_queijo.jpg" },
                     { id: "other_3", name: "Coxinha de frango", price: 2.50, description: "Coxinha de frango com catupiry.", image: "img/coxinha_frango.jpg" },
                     { id: "other_4", name: "Batata espiral", price: 5.00, description: "Batata no palito em formato espiral.", image: "img/batata_espiral.jpg" },
-                    { id: "other_5", name: "Tokoti", price: 4.50, description: "Mini-rolinhos com molho coreano.", image: "img/tokoti.jpg" }
+                    { id: "other_5", name: "Tokoti", price: 4.50, description: "Mini-rolinhos com molho coreano.", image: "img/tokoti.jpg" },
                     { id: "other_6", name: "Batata frita", price: 5.00, description: "Batata frita.", image: "img/batata_frita.jpg" }
                 ]
             },
@@ -414,7 +414,6 @@
 
             message += `\n💰 Total: R$ ${total.toFixed(2).replace('.', ',')}\n`;
 
-            // 선택된 결제 수단 가져오기
             let selectedPayment = document.querySelector('input[name="payment"]:checked').value;
             message += `💳 Pagamento: ${selectedPayment}\n`;
 
