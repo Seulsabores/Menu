@@ -102,22 +102,28 @@ function updateTotal() {
     document.getElementById("total-price").innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
 }
 
-// 주문 방식(픽업/배달)에 따른 주소창 및 결제 수단 동적 제어
+// 1번(Entrega 선택 시 Pix 고정) 및 2번(주소창 생성)을 처리하는 함수
 function toggleOrderType() {
     const orderType = document.querySelector('input[name="orderType"]:checked').value;
     const addressBox = document.getElementById("address-box");
     const paymentOptionsContainer = document.getElementById("payment-options-container");
 
     if (orderType === "Entrega") {
+        // 배달 선택 시 주소창 표시
         addressBox.style.display = "block";
+        
+        // 결제수단을 Pix로 고정하고 선택 변경 불가 처리
         paymentOptionsContainer.innerHTML = `
             <label style="opacity: 0.8; cursor: not-allowed;">
                 <input type="radio" name="payment" value="Pix" checked disabled> Pix (Obrigatório para entrega)
             </label>
         `;
     } else {
+        // 매장 픽업 선택 시 주소창 숨김 및 초기화
         addressBox.style.display = "none";
         document.getElementById("delivery-address").value = "";
+        
+        // 결제수단을 Pix, Dinheiro 선택 가능하도록 복구
         paymentOptionsContainer.innerHTML = `
             <label>
                 <input type="radio" name="payment" value="Pix" checked> Pix
@@ -150,12 +156,12 @@ function sendWhatsAppOrder() {
 
     message += `\n💰 Total: R$ ${total.toFixed(2).replace('.', ',')}\n`;
 
-    // 주문 방식 추가
+    // 주문 방식 확인
     let orderType = document.querySelector('input[name="orderType"]:checked').value;
     let orderTypeText = orderType === "Retirada" ? "Retirada na Loja (매장 픽업)" : "Entrega (배달)";
     message += `📍 Tipo: ${orderTypeText}\n`;
 
-    // 배달일 경우 주소 필수 검증 및 추가
+    // 배달(Entrega)일 경우 주소 입력 여부 확인 및 메시지 추가
     if (orderType === "Entrega") {
         let address = document.getElementById("delivery-address").value.trim();
         if (!address) {
@@ -166,7 +172,12 @@ function sendWhatsAppOrder() {
         message += `🏠 Endereço: ${address}\n`;
     }
 
-    let selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+    // 결제 수단 추가 (배달일 때는 disabled 상태이므로 체크된 값을 가져오거나 'Pix'로 안전하게 처리)
+    let selectedPayment = "Pix";
+    let paymentInput = document.querySelector('input[name="payment"]:checked');
+    if (paymentInput) {
+        selectedPayment = paymentInput.value;
+    }
     message += `💳 Pagamento: ${selectedPayment}\n`;
 
     let notes = document.getElementById("order-notes").value.trim();
