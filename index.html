@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seul Sabores - Pedido Online</title>
+    <!-- CSS 파일 연결 + 캐시 바스팅 적용 -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="img/logo.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+            <h1>Seul Sabores</h1>
+        </div>
+        <p>Faça seu pedido direto pelo WhatsApp</p>
+    </header>
+
+    <div class="container" id="menu-container"></div>
+
+    <div class="container">
+        <div class="section-box">
+            <label>Forma de Pagamento</label>
+            <div class="payment-options">
+                <label>
+                    <input type="radio" name="payment" value="Pix" checked> Pix
+                </label>
+                <label>
+                    <input type="radio" name="payment" value="Dinheiro"> Dinheiro
+                </label>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <label for="order-notes">Observações</label>
+            <textarea id="order-notes" rows="2" placeholder="Ex: Troco para R$ 50..."></textarea>
+        </div>
+    </div>
+
+    <div class="footer-bar">
+        <div class="total-display">
+            Total: <span id="total-price">R$ 0,00</span>
+        </div>
+        <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+            📱 Finalizar pedido
+        </button>
+    </div>
+
+    <!-- JS 파일 연결 + 캐시 바스팅 적용 -->
+    <script src="script.js?v=1.0"></script>
+</body>
+</html>
