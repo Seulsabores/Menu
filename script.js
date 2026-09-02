@@ -99,7 +99,19 @@ function updateTotal() {
     for (let id in cart) {
         total += cart[id].price * cart[id].qty;
     }
-    document.getElementById("total-price").innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    
+    // 현재 선택된 주문 방식 확인 (매장 픽업 vs 배달)
+    let orderTypeInput = document.querySelector('input[name="orderType"]:checked');
+    let orderType = orderTypeInput ? orderTypeInput.value : "Retirada";
+    
+    let priceText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    
+    // 배달(Entrega)일 때만 옆에 배달비 안내 문구 추가
+    if (orderType === "Entrega") {
+        priceText += ` <span style="font-size: 0.8rem; font-weight: normal; opacity: 0.8;">(+ taxa de entrega)</span>`;
+    }
+    
+    document.getElementById("total-price").innerHTML = priceText;
 }
 
 // 1번(Entrega 선택 시 Pix 고정) 및 2번(주소창 생성)을 처리하는 함수
@@ -133,6 +145,7 @@ function toggleOrderType() {
             </label>
         `;
     }
+    updateTotal();
 }
 
 function sendWhatsAppOrder() {
