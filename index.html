@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seul Sabores - Pedido Online</title>
-    <!-- CSS 파일 연결 + 캐시 바스팅 적용 -->
     <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body>
@@ -20,9 +19,29 @@
     <div class="container" id="menu-container"></div>
 
     <div class="container">
+        <!-- 주문 방식 선택 (매장 픽업 / 배달) -->
+        <div class="section-box">
+            <label>Tipo de Pedido (Tipo de entrega)</label>
+            <div class="payment-options">
+                <label>
+                    <input type="radio" name="orderType" value="Retirada" checked onchange="toggleOrderType()"> Retirada na Loja (매장 픽업)
+                </label>
+                <label>
+                    <input type="radio" name="orderType" value="Entrega" onchange="toggleOrderType()"> Entrega (배달)
+                </label>
+            </div>
+        </div>
+
+        <!-- 배달 선택 시에만 나타나는 주소 입력 창 -->
+        <div class="section-box" id="address-box" style="display: none;">
+            <label for="delivery-address">Endereço de Entrega (배달 주소)</label>
+            <textarea id="delivery-address" rows="2" placeholder="Ex: Rua, Número, Bairro, Ponto de referência..."></textarea>
+        </div>
+
+        <!-- 결제 수단 영역 -->
         <div class="section-box">
             <label>Forma de Pagamento</label>
-            <div class="payment-options">
+            <div class="payment-options" id="payment-options-container">
                 <label>
                     <input type="radio" name="payment" value="Pix" checked> Pix
                 </label>
@@ -47,7 +66,7 @@
         </button>
     </div>
 
-    <!-- JS 파일 연결 + 캐시 바스팅 적용 -->
-    <script src="script.js?v=1.0"></script>
+    <!-- 스크립트 파일 연결 (버전 업데이트 반영: v=1.1) -->
+    <script src="script.js?v=1.1"></script>
 </body>
 </html>
