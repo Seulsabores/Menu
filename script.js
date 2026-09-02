@@ -102,6 +102,33 @@ function updateTotal() {
     document.getElementById("total-price").innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
 }
 
+// 주문 방식(픽업/배달)에 따른 주소창 및 결제 수단 동적 제어
+function toggleOrderType() {
+    const orderType = document.querySelector('input[name="orderType"]:checked').value;
+    const addressBox = document.getElementById("address-box");
+    const paymentOptionsContainer = document.getElementById("payment-options-container");
+
+    if (orderType === "Entrega") {
+        addressBox.style.display = "block";
+        paymentOptionsContainer.innerHTML = `
+            <label style="opacity: 0.8; cursor: not-allowed;">
+                <input type="radio" name="payment" value="Pix" checked disabled> Pix (Obrigatório para entrega)
+            </label>
+        `;
+    } else {
+        addressBox.style.display = "none";
+        document.getElementById("delivery-address").value = "";
+        paymentOptionsContainer.innerHTML = `
+            <label>
+                <input type="radio" name="payment" value="Pix" checked> Pix
+            </label>
+            <label>
+                <input type="radio" name="payment" value="Dinheiro"> Dinheiro
+            </label>
+        `;
+    }
+}
+
 function sendWhatsAppOrder() {
     let total = 0;
     let hasItems = false;
@@ -122,6 +149,22 @@ function sendWhatsAppOrder() {
     }
 
     message += `\n💰 Total: R$ ${total.toFixed(2).replace('.', ',')}\n`;
+
+    // 주문 방식 추가
+    let orderType = document.querySelector('input[name="orderType"]:checked').value;
+    let orderTypeText = orderType === "Retirada" ? "Retirada na Loja (매장 픽업)" : "Entrega (배달)";
+    message += `📍 Tipo: ${orderTypeText}\n`;
+
+    // 배달일 경우 주소 필수 검증 및 추가
+    if (orderType === "Entrega") {
+        let address = document.getElementById("delivery-address").value.trim();
+        if (!address) {
+            alert("Por favor, informe o endereço de entrega.");
+            document.getElementById("delivery-address").focus();
+            return;
+        }
+        message += `🏠 Endereço: ${address}\n`;
+    }
 
     let selectedPayment = document.querySelector('input[name="payment"]:checked').value;
     message += `💳 Pagamento: ${selectedPayment}\n`;
