@@ -11,9 +11,9 @@ const menuData = [
     {
         category: "🥟 Pastel",
         items: [
-            { id: "pastel_1", name: "Queijo", price: 7.50, description: "Pastel recheado com Queijo.", image: "img/pastel_queijo.jpg" },
-            { id: "pastel_2", name: "Misto", price: 7.50, description: "Queijo e Presunto.", image: "img/pastel_misto.jpg" },
-            { id: "pastel_3", name: "Mistão", price: 10.00, description: "Queijo, Presunto e Carne.", image: "img/pastel_mistao.jpg" }
+            { id: "pastel_1", name: "Pastel de Queijo", price: 7.50, description: "Pastel recheado com Queijo.", image: "img/pastel_queijo.jpg" },
+            { id: "pastel_2", name: "Pastel de Misto", price: 7.50, description: "Queijo e Presunto.", image: "img/pastel_misto.jpg" },
+            { id: "pastel_3", name: "Pastel de Mistão", price: 10.00, description: "Queijo, Presunto e Carne.", image: "img/pastel_mistao.jpg" }
         ]
     },
     {
@@ -158,7 +158,7 @@ function sendWhatsAppOrder() {
 
     // 주문 방식 확인
     let orderType = document.querySelector('input[name="orderType"]:checked').value;
-    let orderTypeText = orderType === "Retirada" ? "Retirada na Loja (매장 픽업)" : "Entrega (배달)";
+    let orderTypeText = orderType === "Retirada" ? "Retirada na Loja" : "Entrega";
     message += `📍 Tipo: ${orderTypeText}\n`;
 
     // 배달(Entrega)일 경우 주소 입력 여부 확인 및 메시지 추가
