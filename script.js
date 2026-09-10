@@ -3,8 +3,8 @@ const menuData = [
         category: "🔥 Promoções (até 20/09)",
         items: [
             { id: "promo_1", name: "Hot dog meio meio + Refrigerante Laranja", price: 9.50, description: "Hot dog meio meio e Refrigerante Laranja (250ml).", image: "img/promo_hotdog_laranja.jpg" },
-            { id: "promo_2", name: "Sanduíche + Refrigerante Laranja", price: 13.50, description: "Sanduíche estilo da coreia e Refrigerante Laranja (250ml).", image: "img/promo_sanduiche_laranja.jpg" },
-            { id: "promo_3", name: "Hot dog meio meio + Tokoti + Refrigerante Laranja", price: 13.00, description: "Hot dog meio meio, Tokoti e Refrigerante Laranja (250ml).", image: "img/promo_hotdog_tokoti_laranja.jpg" },
+            { id: "promo_2", name: "Hot dog meio meio + Tokoti + Refrigerante Laranja", price: 13.00, description: "Hot dog meio meio, Tokoti e Refrigerante Laranja (250ml).", image: "img/promo_hotdog_tokoti_laranja.jpg" },
+            { id: "promo_3", name: "Sanduíche + Refrigerante Laranja", price: 13.50, description: "Sanduíche estilo da coreia e Refrigerante Laranja (250ml).", image: "img/promo_sanduiche_laranja.jpg" },
             { id: "promo_4", name: "Sanduíche + Tokoti + Refrigerante Laranja", price: 17.00, description: "Sanduíche estilo da coreia, Tokoti e Refrigerante Laranja (250ml).", image: "img/promo_sanduiche_tokoti_laranja.jpg" }
         ]
     },
