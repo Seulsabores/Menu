@@ -1,5 +1,14 @@
 const menuData = [
     {
+        category: "🔥 Promoções (até 20/09)",
+        items: [
+            { id: "promo_1", name: "Hot dog meio meio + Refrigerante Laranja", price: 9.50, description: "Hot dog meio meio e Refrigerante Laranja (250ml).", image: "img/promo_hotdog_laranja.jpg" },
+            { id: "promo_2", name: "Sanduíche + Refrigerante Laranja", price: 13.50, description: "Sanduíche estilo da coreia e Refrigerante Laranja (250ml).", image: "img/promo_sanduiche_laranja.jpg" },
+            { id: "promo_3", name: "Hot dog meio meio + Tokoti + Refrigerante Laranja", price: 13.00, description: "Hot dog meio meio, Tokoti e Refrigerante Laranja (250ml).", image: "img/promo_hotdog_tokoti_laranja.jpg" },
+            { id: "promo_4", name: "Sanduíche + Tokoti + Refrigerante Laranja", price: 17.00, description: "Sanduíche estilo da coreia, Tokoti e Refrigerante Laranja (250ml).", image: "img/promo_sanduiche_tokoti_laranja.jpg" }
+        ]
+    },
+    {
         category: "🌭 Hot dog",
         items: [
             { id: "hotdog_1", name: "Meio meio", price: 8.00, description: "Queijo, Salsicha.", image: "img/hotdog_meiomeio.jpg" },
@@ -100,13 +109,11 @@ function updateTotal() {
         total += cart[id].price * cart[id].qty;
     }
     
-    // 현재 선택된 주문 방식 확인 (매장 픽업 vs 배달)
     let orderTypeInput = document.querySelector('input[name="orderType"]:checked');
     let orderType = orderTypeInput ? orderTypeInput.value : "Retirada";
     
     let priceText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     
-    // 배달(Entrega)일 때만 옆에 배달비 안내 문구 추가
     if (orderType === "Entrega") {
         priceText += ` <span style="font-size: 0.8rem; font-weight: normal; opacity: 0.8;">(+ taxa de entrega)</span>`;
     }
@@ -114,28 +121,21 @@ function updateTotal() {
     document.getElementById("total-price").innerHTML = priceText;
 }
 
-// 1번(Entrega 선택 시 Pix 고정) 및 2번(주소창 생성)을 처리하는 함수
 function toggleOrderType() {
     const orderType = document.querySelector('input[name="orderType"]:checked').value;
     const addressBox = document.getElementById("address-box");
     const paymentOptionsContainer = document.getElementById("payment-options-container");
 
     if (orderType === "Entrega") {
-        // 배달 선택 시 주소창 표시
         addressBox.style.display = "block";
-        
-        // 결제수단을 Pix로 고정하고 선택 변경 불가 처리
         paymentOptionsContainer.innerHTML = `
             <label style="opacity: 0.8; cursor: not-allowed;">
                 <input type="radio" name="payment" value="Pix" checked disabled> Pix (Obrigatório para entrega)
             </label>
         `;
     } else {
-        // 매장 픽업 선택 시 주소창 숨김 및 초기화
         addressBox.style.display = "none";
         document.getElementById("delivery-address").value = "";
-        
-        // 결제수단을 Pix, Dinheiro 선택 가능하도록 복구
         paymentOptionsContainer.innerHTML = `
             <label>
                 <input type="radio" name="payment" value="Pix" checked> Pix
@@ -169,12 +169,10 @@ function sendWhatsAppOrder() {
 
     message += `\n💰 Total: R$ ${total.toFixed(2).replace('.', ',')}\n`;
 
-    // 주문 방식 확인
     let orderType = document.querySelector('input[name="orderType"]:checked').value;
     let orderTypeText = orderType === "Retirada" ? "Retirada na Loja" : "Entrega";
     message += `📍 Tipo: ${orderTypeText}\n`;
 
-    // 배달(Entrega)일 경우 주소 입력 여부 확인 및 메시지 추가
     if (orderType === "Entrega") {
         let address = document.getElementById("delivery-address").value.trim();
         if (!address) {
@@ -185,7 +183,6 @@ function sendWhatsAppOrder() {
         message += `🏠 Endereço: ${address}\n`;
     }
 
-    // 결제 수단 추가 (배달일 때는 disabled 상태이므로 체크된 값을 가져오거나 'Pix'로 안전하게 처리)
     let selectedPayment = "Pix";
     let paymentInput = document.querySelector('input[name="payment"]:checked');
     if (paymentInput) {
