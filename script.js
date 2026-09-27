@@ -46,7 +46,8 @@ const menuData = [
         category: "🥤 Bebidas",
         items: [
             { id: "drink_1", name: "Guaraná", price: 2.50, description: "250ml.", image: "img/guarana.jpg" },
-            { id: "drink_2", name: "Laranja", price: 2.50, description: "250ml.", image: "img/laranja.jpg" }
+            { id: "drink_2", name: "Laranja", price: 2.50, description: "250ml.", image: "img/laranja.jpg" },
+            { id: "drink_3", name: "Suco de Laranja", price: 3.00, description: "330ml.", image: "img/suco_laranja.jpg" }
         ]
     }
 ];
@@ -94,7 +95,6 @@ function initMenu() {
         });
     });
 }
-
 function updateQty(id, change) {
     if (cart[id]) {
         cart[id].qty = Math.max(0, cart[id].qty + change);
