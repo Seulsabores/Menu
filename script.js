@@ -48,7 +48,7 @@ const menuData = [
             { id: "drink_1", name: "Guaraná", price: 2.50, description: "250ml.", image: "img/guarana_indaia.jpg" },
             { id: "drink_2", name: "Laranja", price: 2.50, description: "250ml.", image: "img/laranja_maissabor.jpg" },
             { id: "drink_2", name: "Uva", price: 2.50, description: "250ml.", image: "img/uva_maissabor.jpg" },
-            { id: "drink_2", name: "Guaraná 1L", price: 2.50, description: "1L.", image: "img/guarana_1l.jpg" },
+            { id: "drink_2", name: "Guaraná 1L", price: 7.00, description: "1L.", image: "img/guarana_1l.jpg" },
             { id: "drink_3", name: "Suco de Laranja", price: 3.00, description: "330ml.", image: "img/suco_laranja.jpg" }
         ]
     }
