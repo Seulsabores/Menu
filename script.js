@@ -29,7 +29,7 @@ const menuData = [
         category: "🍔 Outros",
         items: [
 //          { id: "other_1", name: "Sanduíche", price: 12.00, description: "Sanduíche estilo da coreia.", image: "img/sanduiche.jpg" },
-            { id: "other_2", name: "Coxinha de frango", price: 2.50, description: "Coxinha de frango com catupiry.", image: "img/coxinha_frango.jpg" },
+            { id: "other_2", name: "Coxinha de frango", price: 2.50, description: "Coxinha de frango.", image: "img/coxinha_frango.jpg" },
             { id: "other_3", name: "Batata espiral", price: 5.00, description: "Batata no palito em formato espiral.", image: "img/batata_espiral.jpg" },
             { id: "other_4", name: "Tokoti", price: 4.50, description: "Mini-rolinhos com molho coreano.", image: "img/tokoti.jpg" },
             { id: "other_5", name: "Batata frita", price: 5.00, description: "Batata frita.", image: "img/batata_frita.jpg" },
