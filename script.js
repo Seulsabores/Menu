@@ -36,12 +36,12 @@ const menuData = [
             //{ id: "other_2", name: "Palito de queijo", price: 4.00, description: "Palito de Queijo empanado.", image: "img/palito_queijo.jpg" }
         ]
     },
-    {
-        category: "🍱 Combo",
-        items: [
-            { id: "combo_1", name: "Sanduíche + batata frita", price: 17.00, description: "Acompanha sanduíche e batata frita.", image: "img/combo_sanduiche.jpg" }
-        ]
-    },
+//    {
+//        category: "🍱 Combo",
+//        items: [
+//            { id: "combo_1", name: "Sanduíche + batata frita", price: 17.00, description: "Acompanha sanduíche e batata frita.", image: "img/combo_sanduiche.jpg" }
+//        ]
+//    },
     {
         category: "🥤 Bebidas",
         items: [
